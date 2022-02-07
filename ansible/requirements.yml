@@ -1,0 +1,9 @@
+---
+- src: git+ssh://gitea@git.jameslavender.com:8822/jameslavender/linode-preflight.git
+  name: linode-preflight
+
+- src: git+ssh://git@github.com/caddy-ansible/caddy-ansible.git
+  name: caddy-ansible
+
+- src: git+ssh://gitea@git.jameslavender.com:8822/jameslavender/jekyll_site-ansible.git
+  name: jekyll-site

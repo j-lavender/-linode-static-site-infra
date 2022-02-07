@@ -1,0 +1,6 @@
+---
+- name: reload_caddy
+  service:
+    name: caddy
+    state: reloaded
+  become: yes

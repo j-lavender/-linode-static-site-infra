@@ -1,0 +1,40 @@
+---
+- name: linode_preflight | add_user | Add admin group
+  group:
+    name: "{{ group }}"
+    state: present
+
+- name: linode_preflight | add_user | Allow admin group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%{{ group }}'
+    line: '%{{ group }} ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+  become: yes
+
+- name: linode_preflight | add_user | Add admin user
+  user:
+    name: "{{ user }}"
+    group: "{{ group }}"
+    state: present
+    create_home: yes
+    shell: /bin/bash
+  become: yes
+
+- name: linode_preflight | add_user | Ensure admin user ssh directory exists
+  file:
+    path: "/home/{{ user }}/.ssh/"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0700
+  become: yes
+
+- name: linode_preflight | add_user | Add SSH keys to admin user
+  authorized_key:
+    user: "{{ user }}"
+    state: present
+    key: "{{ item.key }}"
+  with_items: "{{ ssh__keys }}"
+  become: yes

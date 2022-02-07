@@ -1,0 +1,21 @@
+---
+- name: web_server | Write Caddyfile and restart Caddy
+  template:
+    src: "etc/caddy/Caddyfile.j2"
+    dest: "/etc/caddy/Caddyfile"
+    owner: caddy
+    group: "{{ group }}"
+    mode: 0644
+  become: yes
+  notify: 
+    - reload_caddy
+
+- name: web_server | Allow Internet traffic
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  become: yes
+  loop:
+    - '80'
+    - '443'

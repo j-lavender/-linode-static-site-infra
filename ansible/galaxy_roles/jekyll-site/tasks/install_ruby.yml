@@ -1,0 +1,48 @@
+---
+- name: jekyll_site | Install Ruby | Add brightbox PPA
+  apt_repository:
+    repo: 'ppa:brightbox/ruby-ng'
+  become: yes
+
+- name: jekyll_site | Install Ruby | Install Ruby
+  apt:
+    name: "ruby{{ ruby_version }}"
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: jekyll_site | Install Ruby | Install Ruby Development headers
+  apt:
+    name: "ruby{{ ruby_version }}-dev"
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: jekyll_site | Install Ruby | Install bundler
+  gem:
+    name: bundler
+    version: "{{ bundler_version }}"
+    state: present
+    include_dependencies: True
+    # user_install: False
+  become: yes
+
+- name: jekyll_site | Install Ruby | Install bundle
+  gem:
+    name: bundle
+    state: present
+    include_dependencies: True
+    user_install: False
+  become: yes
+
+- name: jekyll_site | Install Ruby | Update ruby alternatives
+  alternatives:
+    name: ruby
+    path: "/usr/bin/ruby{{ ruby_version }}"
+  become: yes
+
+- name: jekyll_site | Install Ruby | Update Gem alternatives
+  alternatives:
+    name: gem
+    path: "/usr/bin/gem{{ ruby_version }}"
+  become: yes

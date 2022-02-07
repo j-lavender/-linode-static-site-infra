@@ -1,0 +1,10 @@
+---
+ruby_version: '2.7'
+bundler_version: '2.1.4'
+
+ssh__keys:
+  - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDLNjy5+2zBjT4cHUNzWeoCoQYi8y+7AHQJr+2cAfw+S+q7JWlx00L3XAp3mINARcJyRxVb4TypiTV3vX55cwAz2eYmzyYBQfDCorNq+26iNs9pF/SwEq1nHhM0MtVu7w9v2kizVFMP/aYN3kcUaTM0hGNQ5OqNy/1by91zei/wsieXjxj18OiThWD77oSoxZrejxrPTZRcxL4aPgeEbJqsXtvBvPBjhLF7s4EvmPfzb0N/hYaQOwXDhLOU576yN/6TgnGkSazsVIkZRO67qVAlZAJs4VOlm7x1t/9cwLhwjDUqj9x+nIVh/Cr62jvn8aQVS9SO69rbkzf8lhSaVbgQ/Yi/lqbOQJ8gc0RKhcJwz2TltaY9piaVOSgiIW7sqWfcnwWohs2C+YS0F6qN8Nor897dWONbwRCvp52b6u0mqf3DEUIlWoDopVbkVgSg08uOoswJ/mum/6Xn+SN+zsL2y+32UlbE3gQRL/WUh7hzN+XVupBwijgQXgcfN2t5UgspiAIpup0Po+I/enbNdiZ/rAlhr8wX0NetTYr2rrHNzzV74HjnXjjUo72zaeMk9rPseL4FgnL8F7BBnuctW5tApjmA3AB5VBD7GbTQLRXg1kYBxujiQTSAQulpm7ezKz3PgUsUOg5IYAQYa1Bye2bit4ayNKWMM2iXGLfSkTYluw==
+
+# Defaults
+user: "ops"
+group: "oper"

@@ -1,0 +1,26 @@
+{{ domain }} {
+    root * /srv/{{ site_name }}/current/_site
+    file_server
+
+    log {
+        output file /var/log/caddy/{{ domain }}.access.log {
+        	roll_size 3MiB
+	        roll_keep 5
+	        roll_keep_for 48h
+        }
+        format console
+    }
+}
+{{ staging_domain }} {
+    root * /srv/{{ site_name }}-staging/current/_site
+    file_server
+
+    log {
+        output file /var/log/caddy/{{ domain }}.access.log {
+        	roll_size 3MiB
+	        roll_keep 5
+	        roll_keep_for 48h
+        }
+        format console
+    }
+}

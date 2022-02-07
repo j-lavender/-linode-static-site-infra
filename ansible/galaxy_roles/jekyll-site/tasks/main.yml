@@ -1,0 +1,22 @@
+---
+- include_tasks: dependencies.yml
+- include_tasks: deploy_user.yml
+- include_tasks: install_ruby.yml
+
+- name: Install jekyll
+  gem:
+    name: jekyll
+    state: present
+    include_dependencies: True
+    user_install: False
+  become: yes
+
+- name: Setup deploy directories
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: "{{ deploy_user }}"
+    group: "{{ deploy_group }}"
+    mode: 0755
+  with_items: "{{ deploy_dirs }}"
+  become: yes

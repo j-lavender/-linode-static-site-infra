@@ -1,0 +1,18 @@
+---
+- hosts: all
+  gather_facts: true
+  roles:
+    - linode-preflight
+    - caddy-ansible
+    - jekyll-site
+    - web-server
+  tasks:
+    - name: clean-up | Close now unneeded firewall ports.
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: tcp
+        delete: yes
+      become: yes
+      loop:
+        - '22'

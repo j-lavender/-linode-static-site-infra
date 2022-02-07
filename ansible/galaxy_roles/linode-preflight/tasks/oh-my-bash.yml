@@ -1,0 +1,12 @@
+---
+- name: linode_preflight | ohmybash | Install dependency
+  apt:
+    pkg: curl
+    state: present
+  become: yes
+
+- name: linode_preflight | ohmybash | Install OhMyBash
+  shell:
+    cmd: bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+  become: yes
+  become_user: "{{ user }}"

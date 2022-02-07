@@ -1,0 +1,41 @@
+---
+- name: jekyll_site | Deploy User | Ensure deploy group exists
+  group:
+    name: "{{ deploy_group }}"
+    state: present
+  become: yes
+
+- name: jekyll_site | Deploy User | Allow deploy group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%{{ deploy_group }}'
+    line: '%{{ deploy_group }} ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+  become: yes
+
+- name: jekyll_site | Deploy User | Ensure deploy user exists.
+  user:
+    name: "{{ deploy_user }}"
+    group: "{{ deploy_group }}"
+    state: present
+    create_home: yes
+    shell: /bin/bash
+  become: yes
+
+- name: jekyll_site | Deploy User | Ensure admin user ssh directory exists
+  file:
+    path: "/home/{{ deploy_user }}/.ssh/"
+    state: directory
+    owner: "{{ deploy_user }}"
+    group: "{{ deploy_group }}"
+    mode: 0700
+  become: yes
+
+- name: jekyll_site | Deploy User | Add SSH keys to admin user
+  authorized_key:
+    user: "{{ deploy_user }}"
+    state: present
+    key: "{{ item.key }}"
+  with_items: "{{ ssh__keys }}"
+  become: yes

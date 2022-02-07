@@ -1,0 +1,7 @@
+[all:vars]
+ansible_port=22
+ansible_user=root
+
+[jekyll_site]
+#45.79.216.88
+#45.79.216.70

@@ -1,0 +1,14 @@
+---
+# Website/Blog settings
+domain: "example.com"
+staging_domain: "staging.example.com"
+site_name: "example"
+
+# Defaults
+deploy_dirs: 
+  - "/srv/{{ site_name }}"
+  - "/srv/{{ site_name }}-staging"
+
+deploy_user: "jekyll"
+deploy_group: "jekyll"
+

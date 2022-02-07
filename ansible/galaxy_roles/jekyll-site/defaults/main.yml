@@ -1,0 +1,12 @@
+---
+# site_name: "example-site"
+# deploy_dirs: 
+#   - "/srv/{{ site_name }}/"
+#   # - "/srv/{{ site_name }}-staging/"
+# deploy_user: "jekyll"
+# deploy_group: "jekyll"
+
+# ruby_version: "2.7"
+# bundler_version: "2.1.4"
+
+# ssh_keys: []

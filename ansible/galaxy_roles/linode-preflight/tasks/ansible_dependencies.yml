@@ -1,0 +1,9 @@
+---
+- name: linode-preflight | ansible dependencies | Install Python
+  raw: test -e /usr/bin/python || (sudo apt-get -y update && sudo apt-get install -y python2-minimal)
+  register: common__pyout
+  become: yes
+  changed_when:
+    - False
+    - common__pyout.stdout != ""
+    - common__pyout.stderr != "\r\n"

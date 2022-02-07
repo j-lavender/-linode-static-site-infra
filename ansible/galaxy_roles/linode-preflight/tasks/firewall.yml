@@ -1,0 +1,49 @@
+---
+- name: linode_preflight | firewall | install ufw
+  apt:
+    pkg: ufw
+    state: present
+  become: yes
+
+- name: linode_preflight | firewall | Open ssh port
+  ufw:
+    state: enabled
+    rule: "{{ firewall__ssh_rule }}"
+    port: "{{ item }}"
+    proto: tcp
+  loop:
+    - 22
+    - 8822
+  become: yes
+
+- name: linode_preflight | firewall | deny all incoming connections
+  ufw:
+    state: enabled
+    policy: deny
+    direction: incoming
+  become: yes
+
+- name: linode_preflight | firewall | allow all outgoing connections
+  ufw:
+    state: enabled
+    policy: allow
+    direction: outgoing
+  become: yes
+
+- name: linode_preflight | firewall | allow all connections from localhost
+  ufw:
+    state: enabled
+    from: "127.0.0.1"
+    rule: allow
+    proto: any
+  become: yes
+
+- name: linode_preflight | firewall | Copy SSH config
+  template:
+    src: "etc/ssh/sshd_config.j2"
+    dest: "/etc/ssh/sshd_config"
+    mode: 0644
+    validate: '/usr/sbin/sshd -t -f %s'
+  become: yes
+  notify: restart sshd
+
