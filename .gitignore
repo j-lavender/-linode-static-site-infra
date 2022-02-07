@@ -1,0 +1,5 @@
+.envrc
+.vault_pass
+*.tfstate
+*.tfstate.backup
+.terraform*
