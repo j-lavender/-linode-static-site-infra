@@ -23,7 +23,7 @@ First, clone the repo. Then `cd terraform/`. From here, create a `.envrc` file t
         export AWS_ACCESS_KEY_ID=<<linode_object_storage_access_key>>
         export AWS_SECRET_ACCESS_KEY=<<linode_object_storage_secret_access_key>>
 
-Replace the name and region names in `backend.tf` to match the bucket created to store the .tfstate file. 
+Replace the name and region names in `terraform/backend.tf` to match the bucket created to store the .tfstate file. 
 
 Use `direnv` to load the vars and Terraform to the Linode account:
 
