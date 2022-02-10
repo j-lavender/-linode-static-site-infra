@@ -15,9 +15,20 @@ _Hint: If configured properly using the provided setup, a different set of stati
 
 ### Initialize Linode Infrastructure - Terraform
 
-First, clone the repo. Then `cd terraform/`. From here, use the following commands to connect Terraform to the Linode account:
+First, clone the repo. Then `cd terraform/`. From here, create a `.envrc` file to load a few custom variables into your shell using `direnv`: 
 
-        echo "export TF_VAR_token=<<linode_account_api_token>>" >> .envrc  ## Add this manually, don't put your token in a CLI history.
+        
+        export TF_VAR_token=TF_VAR_token=<<linode_account_api_token>>
+        export TF_VAR_root_pass=<<randomly_generated_root_pass_for_all_instances>>
+        export AWS_ACCESS_KEY_ID=<<linode_object_storage_access_key>>
+        export AWS_SECRET_ACCESS_KEY=<<linode_object_storage_secret_access_key>>
+
+Replace the name and region names in `backend.tf` to match the bucket created to store the .tfstate file. 
+
+Use `direnv` to load the vars and Terraform to the Linode account:
+
+        echo "export TF_VAR_token=<<linode_account_api_token>>" >> .envrc  ## Add this manually, don't put a token in a CLI history.
+        
         direnv allow
         terraform init
 
