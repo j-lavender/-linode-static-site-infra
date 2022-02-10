@@ -17,7 +17,7 @@ _Hint: If configured properly using the provided setup, a different set of stati
 
 First, clone the repo. Then `cd terraform/`. From here, use the following commands to connect Terraform to the Linode account:
 
-        echo "export TF_VAR_token=<<linode_account_api_token>>" >> .envrc
+        echo "export TF_VAR_token=<<linode_account_api_token>>" >> .envrc  ## Add this manually, don't put your token in a CLI history.
         direnv allow
         terraform init
 
