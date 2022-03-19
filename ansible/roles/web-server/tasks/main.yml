@@ -7,7 +7,7 @@
     group: "{{ group }}"
     mode: 0644
   become: yes
-  notify: 
+  notify:
     - reload_caddy
 
 - name: web_server | Allow Internet traffic
